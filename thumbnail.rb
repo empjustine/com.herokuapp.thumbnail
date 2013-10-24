@@ -28,15 +28,14 @@ get '/:height/:width/*/*' do
 
   blob = RestClient.get url
   image = MiniMagick::Image.read blob
+
   halt 500 unless image.valid?
 
   image.resize "#{params[:height]}x#{params[:width]}>"
   image.background 'white'
-  image.flatten
 
   image.format 'jpeg'
   content_type :jpeg
 
-  image.strip
   image.to_blob
 end
