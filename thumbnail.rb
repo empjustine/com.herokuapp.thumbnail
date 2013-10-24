@@ -5,6 +5,10 @@ require 'rest-client'
 require 'addressable/uri'
 
 
+set :environment,     :development
+set :show_exceptions, true
+
+
 before do
 
   expires 36000, :public
