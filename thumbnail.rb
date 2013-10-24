@@ -27,16 +27,16 @@ get '/:height/:width/*/*' do
 
   halt 500 unless image.valid?
 
-  image.background '#ffffff'
-  image.flatten
-  image.resize "#{params[:height]}x#{params[:width]}>"
+  image.combine_options do |img|
+    img.background 'white'
+    img.alpha 'remove'
+    img.alpha 'off'
+    img.resize "#{params[:height]}x#{params[:width]}>"
+  end
+
   image.format 'jpeg'
   image.strip
 
-  image.fill 'none'
-  image.draw 'matte 0,0 floodfill'
-
   content_type :jpeg
-
   image.to_blob
 end
