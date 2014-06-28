@@ -21,6 +21,7 @@ error RestClient::ResourceNotFound do
   raise Sinatra::NotFound
 end
 
+
 get '/:height/:width/*/*' do
 
   raw_url = params[:splat].join '://'
